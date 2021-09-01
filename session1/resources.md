@@ -1,5 +1,7 @@
 # Session 1 Resources
 
+[Decentraland: Workshop Series Questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSexyxLE2n4CIOqgAZNqpYEST0KbH5DRVxbOaIQMXXLk1srsMg/viewform)
+
 ## Host
 Patrick Macom
 
