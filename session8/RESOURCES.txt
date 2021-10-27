@@ -1,0 +1,11 @@
+// Repo Location
+https://github.com/Ethbuilders-NYC-Decentraland-Developers/decentraland-workshop
+
+// DCLConnect Discord
+https://discord.gg/dh2wdp3wgJ
+
+// Video Test Feed - m3u8
+https://emedia.dclconnect.io:5443/tests/streams/296591686695136365840166.m3u8
+
+// Video Test Feed - mp4
+https://emedia.dclconnect.io:5443/tests/streams/306620935338210568993876.mp4
