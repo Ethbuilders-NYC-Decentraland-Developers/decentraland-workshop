@@ -1,51 +1,51 @@
-/// --- Set up a system ---
+import { BoxHighlight } from "dclconnect";
+import { Crate } from "./entities/crate";
+import { Door } from "./entities/door";
+import { Facade } from "./entities/facade";
+import { RotateEntity, Shapes } from "./entities/shapes";
 
-class RotatorSystem {
-  // this group will contain every entity that has a Transform component
-  group = engine.getComponentGroup(Transform)
 
-  update(dt: number) {
-    // iterate over the entities of the group
-    for (let entity of this.group.entities) {
-      // get the Transform component of the entity
-      const transform = entity.getComponent(Transform)
+const location = new Vector3(-8,0,-3)
+const rotation = new Quaternion().setEuler(0,180,0)
 
-      // mutate the rotation
-      transform.rotate(Vector3.Up(), dt * 10)
-    }
+class Base extends Entity{
+  public door: Door
+  public facade: Facade
+
+  constructor(
+    location: Vector3,
+    rotation: Quaternion
+  ){
+    super()
+    this.door = new Door(location)
+    this.facade = new Facade(location)
+    this.door.setParent(this)
+    this.facade.setParent(this)
+
+    this.addComponent(new Transform({
+      rotation
+    }))
+
+    engine.addEntity(this)
   }
 }
 
-// Add a new instance of the system to the engine
-engine.addSystem(new RotatorSystem())
+const base = new Base(location, rotation)
+const crate = new Crate(new Vector3(8,.5,8))
+const crate1 = new Crate(new Vector3(Math.random()*5,.5,8))
+const crate2 = new Crate(new Vector3(Math.random()*5,.5,8))
+const crate3 = new Crate(new Vector3(Math.random()*5,.5,8))
 
-/// --- Spawner function ---
 
-function spawnCube(x: number, y: number, z: number) {
-  // create the entity
-  const cube = new Entity()
+const rotateSystem = new RotateEntity([
+  crate, crate1, crate2, crate3
+])
+engine.addSystem(rotateSystem)
 
-  // add a transform to the entity
-  cube.addComponent(new Transform({ position: new Vector3(x, y, z) }))
 
-  // add a shape to the entity
-  cube.addComponent(new BoxShape())
-
-  // add the entity to the engine
-  engine.addEntity(cube)
-
-  return cube
-}
-
-/// --- Spawn a cube ---
-
-const cube = spawnCube(8, 1, 8)
-
-cube.addComponent(
-  new OnClick(() => {
-    cube.getComponent(Transform).scale.z *= 1.1
-    cube.getComponent(Transform).scale.x *= 0.9
-
-    spawnCube(Math.random() * 8 + 1, Math.random() * 8, Math.random() * 8 + 1)
-  })
+const bh = new BoxHighlight(
+  new Vector3(8,2,8),
+  new Vector3(1,1,1),
+  "top"
 )
+engine.addEntity(bh)

@@ -12,5 +12,11 @@
   },
   "devDependencies": {
     "decentraland-ecs": "latest"
-  }
+  },
+  "dependencies": {
+    "dclconnect": "^0.5.1"
+  },
+  "bundleDependencies": [
+    "dclconnect"
+  ]
 }

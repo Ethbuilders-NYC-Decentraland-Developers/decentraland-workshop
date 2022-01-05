@@ -1,19 +1,16 @@
-// ALL OF THE MAIN CODE GOES
+import { DCLConnectEase, DynamicImage2 } from "../../node_modules/dclconnect/dist/index"
 
-import { BasicScreen } from "./entities/BasicScreen";
+let imageAtlas = "images/alpha_circle.jpg"
+let imageTexture = new Texture(imageAtlas)
 
-const basicScreen = new BasicScreen(
-  new Transform({
-    position: new Vector3(8,2,8),
-    scale: new Vector3(5, 3, 1)
-  }),'images/alpha_circle.jpg')
+const canvas = new UICanvas()
 
-const basicScreen2 = new BasicScreen(new Transform({
-  position: new Vector3(8,5,8),
-  scale: new Vector3(5, 3, 1)
-  }),'images/alpha_dots1.jpg')
+const playButton = new UIImage(canvas, imageTexture)
+playButton.sourceLeft = 26
+playButton.sourceTop = 128
+playButton.sourceWidth = 128
+playButton.sourceHeight = 128
 
-const basicScreen3 = new BasicScreen(new Transform({
-  position: new Vector3(8,8,8),
-  scale: new Vector3(5, 3, 1)
-  }),'images/alpha_scrape.jpg')
+const di = new DynamicImage2(playButton)
+
+di.fadeIn(2, DCLConnectEase.easeInBounce)

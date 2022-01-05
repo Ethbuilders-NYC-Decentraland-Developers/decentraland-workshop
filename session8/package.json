@@ -10,7 +10,19 @@
     "ecs:install": "npm install --save-dev decentraland-ecs@latest",
     "ecs:install-next": "npm install --save-dev decentraland-ecs@next"
   },
+  "dependencies": {
+    "@dcl/ecs-scene-utils": "latest",
+    "@dcl/ui-scene-utils": "latest",
+    "colyseus.js": "^0.14.12",
+    "dclconnect": "^0.5.10"
+  },
   "devDependencies": {
     "decentraland-ecs": "latest"
-  }
+  },
+  "bundleDependencies": [
+    "colyseus.js",
+    "@dcl/ui-scene-utils",
+    "@dcl/ecs-scene-utils",
+    "dclconnect"
+  ]
 }

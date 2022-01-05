@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "dclconnect": "^0.5.15"
+  },
+  "bundleDependencies": [
+    "dclconnect"
+  ]
+}

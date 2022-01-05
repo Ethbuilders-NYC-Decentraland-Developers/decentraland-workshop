@@ -1,7 +1,6 @@
 export const GameState = {
 
 }
-
 interface IPlayerState {
     isHolding: boolean
     holdingEntityId: string | null

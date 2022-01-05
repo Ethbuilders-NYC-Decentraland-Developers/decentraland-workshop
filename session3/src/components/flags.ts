@@ -15,3 +15,10 @@ export class IsDispenser {
     constructor(){
     }
 }
+
+@Component('IsWineGlass')
+export class IsWineGlass {
+    constructor(){
+        
+    }
+}

@@ -12,9 +12,11 @@ export class BeerDispenser extends Entity {
     private greenTap: BeerTap = new BeerTap('green', new Vector3(-.35, 0, .3))
     private tapColliders: tapColliders
 
-    constructor(){
+    constructor(
+        position: Vector3
+    ){
         super()
-        this.addComponent(new Transform({position: new Vector3(8,1.25,8)}))
+        this.addComponent(new Transform({position}))
         this.addComponent(new GLTFShape("models/beerDispenser.glb"))
         this.addComponent(new IsDispenser())
 

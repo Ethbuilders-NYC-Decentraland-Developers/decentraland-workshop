@@ -2,6 +2,12 @@ import { IsDrinkable, IsHoldable } from "src/components/flags"
 import { PlayerState } from "src/multiplayer/state"
 import { swallowSound } from "src/sounds"
 import { Wait } from 'dclconnect'
+import {
+    updateP2PBeerPickUp,
+    updateP2PBeerPutDown,
+    updateP2PBeerFill,
+    updateP2PBeerDrink,
+} from "src/multiplayer/messagebus"
 
 type BeerGlassAnimations = {
     [key:string] : AnimationState
@@ -23,9 +29,10 @@ export class BeerGlass extends Entity {
     private animations: BeerGlassAnimations
 
     constructor(
-        position: Vector3
+        position: Vector3,
+        name?: string
     ){
-        super()
+        super(name ? name : `BeerGlass_${Math.round(Math.random()*400)}`)
         this.addComponent(new Transform({
             position,
             rotation: new Quaternion().setEuler(0,-90,0)
@@ -49,9 +56,8 @@ export class BeerGlass extends Entity {
         this.addPointerDown()
         this.addComponent(new IsHoldable())
         this.addComponent(new IsDrinkable())
-        engine.addEntity(this)
 
-        this.pickUp()
+        engine.addEntity(this)
     }
 
     addPointerDown(){
@@ -64,7 +70,7 @@ export class BeerGlass extends Entity {
                     hoverText: "Pick Up",
                 }
             )
-          )
+        )
     }
 
     public pickUp(){
@@ -72,12 +78,15 @@ export class BeerGlass extends Entity {
             this.pickingUp = true
             this.setParent(Attachable.FIRST_PERSON_CAMERA)
             this.getComponent(Transform).position = this.holdPosition
+
             PlayerState.isHolding = true
             PlayerState.holdingEntityId = this.uuid
+
             new Wait(() => {
                 this.pickingUp = false
             }, 1)
             this.removeComponent(OnPointerDown)
+            updateP2PBeerPickUp(this.uuid)
         }
     }
 

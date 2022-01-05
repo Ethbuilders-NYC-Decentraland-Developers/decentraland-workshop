@@ -14,6 +14,7 @@ export default Arena({
          * Define your room handlers:
          */
         gameServer.define('bargame', BarGame);
+        gameServer.define('chess', ChessGame);
 
     },
 

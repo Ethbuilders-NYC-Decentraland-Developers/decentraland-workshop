@@ -2,8 +2,23 @@
   "compilerOptions": {
     "outFile": "./bin/game.js",
     "allowJs": true,
-    "strict": true
+    "strict": true,
+    "paths": {
+      "dclconnect": [
+        "./node_modules/dclconnect/dist/index.d.ts",
+        "node_modules/dclconnect/dist/index.d.ts"
+      ],
+      "@dcl/ecs-scene-utils": [
+        "./node_modules/@dcl/ecs-scene-utils/dist/index.d.ts"
+      ]
+    },
+    "baseUrl": "."
   },
-  "include": ["src/**/*.ts"],
-  "extends": "./node_modules/decentraland-ecs/types/tsconfig.json"
+  "include": [
+    "src/**/*.ts",
+    "./node_modules/@dcl/ecs-scene-utils/dist/index.js",
+    "./node_modules/dclconnect/dist/index.js"
+  ],
+  "extends": "./node_modules/decentraland-ecs/types/tsconfig.json",
+  "compileOnSave": false
 }
